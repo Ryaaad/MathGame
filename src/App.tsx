@@ -1,12 +1,18 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import OPR from "./Componant/Landing"
 import Playground from "./Componant/Playground";
-import { Begin } from "./feature/main/mainSlice";
+import { Begin, time } from "./feature/main/mainSlice";
 
 function App() {
  const main=useSelector((state :any )=>state.main)
  
 const dispatch=useDispatch();
+useEffect(() => {
+  setInterval(() => {
+    dispatch(time())
+     }, 50); 
+}, [])
 
 
   return (
@@ -18,8 +24,8 @@ const dispatch=useDispatch();
         })}
     
       </div>
-      <div className={` p-2 rounded-sm text-center w-[100px]
-       ${main.Start ? ' bg-black text-white cursor-pointer' : 'bg-[#eee] text-[#ddd] ' } `}
+      <div className={` p-2 rounded-sm text-center w-[110px] ${main.Start ? 'bg-black font-bold  text-white cursor-pointer':
+      'bg-[#eee] text-[#c2c2c2] ' } `}
        onClick={()=>main.Start? dispatch(Begin()) : '' }
        >Start Game</div>
     </div>}

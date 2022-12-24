@@ -18,6 +18,7 @@ const initialState = {
     res2: [5,false]
 } ,
 changed:false,
+width:100,
 lose:false
 };
 
@@ -33,6 +34,10 @@ const mainSlice = createSlice({
     });
     if(Start) state.Start=true;
     else state.Start=false
+    },
+    time:(state)=>{
+      if(state.width>=0) state.width=state.width-1;
+      else {state.width=0; state.lose=true}
     },
     Begin:(state=>{
       state.Begin=true;
@@ -51,11 +56,12 @@ const mainSlice = createSlice({
       state.Score++;
       state.Val1=Math.floor(Math.random() * (1000 - -1000 + 1) + -1000);
       state.Val2=Math.floor(Math.random() * (1000 - -1000 + 1) + -1000);
+      state.width=100;
     }
-    else state.lose=true
+    else {state.width=0; state.lose=true}
     
     }), 
   }
 });
-export const {Click,Begin,Result,Try}= mainSlice.actions
+export const {Click,Begin,Result,Try,time}= mainSlice.actions
 export default mainSlice.reducer;
