@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import OPR from "./Componant/Landing"
+import Playground from "./Componant/Playground";
 import { Begin } from "./feature/main/mainSlice";
 
 function App() {
@@ -10,7 +11,8 @@ const dispatch=useDispatch();
 
 
   return (
-    <div className="grid justify-items-center content-center w-full h-[100vh] grid-rows-[85px,auto] gap-10 ">
+    <>
+     { !main.Begin  && <div className="grid justify-items-center content-center w-full h-[100vh] grid-rows-[85px,auto] gap-10 ">
       <div className="flex gap-7 justify-center text-xl ">
         {main.OPR.map((O: { op: string; id:number; state:boolean })=>{
           return <OPR key={O.id}{...O}></OPR>
@@ -22,7 +24,10 @@ const dispatch=useDispatch();
        onClick={()=>main.Start? dispatch(Begin()) : '' }
        >Start Game</div>
        {main.Begin && <div>LOL</div> }
-    </div>
+    </div>}
+    {main.Begin && <Playground></Playground>  }
+    </>
+   
   )
 }
 

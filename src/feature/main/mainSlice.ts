@@ -8,7 +8,10 @@ const initialState = {
     {id:3,op:"/",state:false},
   ],
   Start: false,
-  Begin:false
+  Begin:false,
+  Score:0,
+  Val1:Math.floor(Math.random() * (1000 - -1000 + 1) + -1000), 
+  Val2:Math.floor(Math.random() * (1000 - -1000 + 1) + -1000),   
 };
 
 const mainSlice = createSlice({
