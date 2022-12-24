@@ -5,7 +5,6 @@ import { Begin } from "./feature/main/mainSlice";
 
 function App() {
  const main=useSelector((state :any )=>state.main)
- console.log(main);
  
 const dispatch=useDispatch();
 
@@ -23,7 +22,6 @@ const dispatch=useDispatch();
        ${main.Start ? ' bg-black text-white cursor-pointer' : 'bg-[#eee] text-[#ddd] ' } `}
        onClick={()=>main.Start? dispatch(Begin()) : '' }
        >Start Game</div>
-       {main.Begin && <div>LOL</div> }
     </div>}
     {main.Begin && <Playground></Playground>  }
     </>

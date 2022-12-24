@@ -11,7 +11,14 @@ const initialState = {
   Begin:false,
   Score:0,
   Val1:Math.floor(Math.random() * (1000 - -1000 + 1) + -1000), 
-  Val2:Math.floor(Math.random() * (1000 - -1000 + 1) + -1000),   
+  Val2:Math.floor(Math.random() * (1000 - -1000 + 1) + -1000),  
+  output: {
+    OP: "",
+    res1: [5,false],
+    res2: [5,false]
+} ,
+changed:false,
+lose:false
 };
 
 const mainSlice = createSlice({
@@ -29,8 +36,26 @@ const mainSlice = createSlice({
     },
     Begin:(state=>{
       state.Begin=true;
-    })
+    }),
+    Result:((state,action:PayloadAction< { OP: string | undefined; res1: any[]; res2: any[] }>)=>{
+      function financial(x:any) {
+        return Number.parseFloat(x).toFixed(2);
+      }
+      state.output.OP=action.payload.OP!;
+      state.output.res1= [+financial( action.payload.res1[0]),action.payload.res1[1]];
+      state.output.res2= [+financial( action.payload.res2[0]),action.payload.res2[1]];
+    }),
+    Try:((state,action:PayloadAction< boolean>)=>{
+      state.changed=!state.changed
+    if(action.payload==true){
+      state.Score++;
+      state.Val1=Math.floor(Math.random() * (1000 - -1000 + 1) + -1000);
+      state.Val2=Math.floor(Math.random() * (1000 - -1000 + 1) + -1000);
+    }
+    else state.lose=true
+    
+    }), 
   }
 });
-export const {Click,Begin}= mainSlice.actions
+export const {Click,Begin,Result,Try}= mainSlice.actions
 export default mainSlice.reducer;
