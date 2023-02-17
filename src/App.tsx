@@ -9,10 +9,11 @@ function App() {
  
 const dispatch=useDispatch();
 useEffect(() => {
+  main.Begin &&
   setInterval(() => {
     dispatch(time())
      }, 50); 
-}, [])
+}, [main.Begin])
 
 
   return (
